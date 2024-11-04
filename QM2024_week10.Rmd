@@ -1,9 +1,9 @@
 ---
-title: "QM 2023 Week 10: Maximum Likelihood Estimation"
+title: 'QM 2024 Week 10: Maximum Likelihood Estimation'
 author:
-  - "Oliver Rittmann"
-  - "Domantas Undzėnas"
-date: "November 09 | 10 , 2023"
+- Domantas Undzėnas
+- "Lisa-Marie Müller"
+date: "November 07 | 08 , 2024"
 output:
   html_document:
     toc: yes
@@ -13,7 +13,8 @@ output:
     css: css/lab.css
     self_contained: yes
     code_folding: hide
-    
+  pdf_document:
+    toc: yes
 ---
 
 ---
