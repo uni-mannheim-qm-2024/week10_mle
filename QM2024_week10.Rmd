@@ -1,7 +1,7 @@
 ---
 title: 'QM 2024 Week 10: Maximum Likelihood Estimation'
 author:
-- Domantas Undzėnas
+- "Domantas Undzėnas"
 - "Lisa-Marie Müller"
 date: "November 07 | 08 , 2024"
 output:
@@ -231,6 +231,15 @@ and plug in various values.
 # Let's start with a sequence
 p <- seq(0, 1, 0.05)
 lik <- binom_lik(y = 7, n = 10, p = p)
+
+# How about a built in function? dbinom is the exact same function that we just wrote ourselves!
+
+lik2 <- dbinom(x = 7, size = 10, p = p)
+
+# Are both likelihoods the same?
+
+all(round(lik, 6) == round(lik2, 6))
+
 ```
 
 ### Base R {-}
@@ -491,56 +500,6 @@ res_opt <-
 
 res_opt
 ```
-### Base R {-}
-
-```{r mle-18, eval=FALSE}
-plot(
-  p,
-  res,
-  type = "l",
-  las = 1,
-  bty = "n",
-  ylab = "L(p)",
-  col = magma(3)[3]
-)
-abline(v = max_lik_p, 
-       col = magma(3)[2],
-       lwd = 2)
-abline(v = res_opt$maximum,
-       col = magma(3)[1],
-       lwd = 2,
-       lty = "dashed")
-legend("topleft",
-       col = c(magma(3)[3],
-               magma(3)[2],
-               magma(3)[1]),
-       lty = c("solid", 
-               "solid", 
-               "dashed"),
-       legend = c("Likelihood function",
-                  "max(Likelihood), by hand",
-                  "max(Likelihood), optimize()"),
-       bty = "n",
-       cex = 0.85)
-```
-### ggplot2 {-}
-
-```{r mle-19, eval=FALSE}
-plot <- data.frame(value = rbind(max_lik_p, res_opt$maximum))
-plot$estimation <- c("max(Likelihood), by hand",
-                     "max(Likelihood), optimize()")
-ggplot() +
-  geom_line(aes(x = p, y = res)) +
-  geom_vline(
-  aes(xintercept = plot$value,
-      color = plot$estimation),
-  lty = c(1, 2)
-  ) +
-  labs(y = "L(p)",
-       color = "") +
-  scale_x_continuous(breaks = seq(0, 1, by = 0.1)) +
-  scale_color_viridis_d(option = "magma", direction = -1, end = 0.7)
-```
 
 ## Log-Likelihood
 
@@ -676,7 +635,7 @@ legend("topleft",
        cex = 0.75)
 ```
 
-Both likelihood function obviously lead to the same p, but are shifted.
+Both likelihood functions obviously lead to the same p, but are shifted.
 
 #### ggplot2 {-}
 
